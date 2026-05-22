@@ -79,18 +79,18 @@ export default function BuilderPage() {
 
   if (!project) return <div className="grid min-h-screen place-items-center">Loading...</div>;
   return (
-    <div className="grid h-screen grid-cols-12 gap-2 p-2">
-      <aside className="glass col-span-2 rounded-xl p-3">
-        <button onClick={() => nav("/dashboard")} className="mb-3 w-full rounded-lg border border-white/20 px-3 py-2 text-sm">Back</button>
+    <div className="grid min-h-screen grid-cols-1 gap-2 p-2 xl:grid-cols-12">
+      <aside className="glass xl:col-span-2 rounded-xl p-3">
+        <button onClick={() => nav("/dashboard")} className="btn-ghost mb-3 w-full text-sm">Back</button>
         <h3 className="font-medium">Examples</h3>
-        <div className="mt-2 space-y-2">{EXAMPLE_PROMPTS.map((p) => <button key={p} onClick={() => setInput(p)} className="w-full rounded-lg border border-white/20 px-2 py-2 text-left text-xs">{p}</button>)}</div>
+        <div className="mt-2 space-y-2">{EXAMPLE_PROMPTS.map((p) => <button key={p} onClick={() => setInput(p)} className="btn-ghost w-full px-2 py-2 text-left text-xs">{p}</button>)}</div>
       </aside>
-      <section className="glass col-span-4 rounded-xl"><ChatPanel messages={messages} input={input} setInput={setInput} onSend={send} /></section>
-      <section className="glass col-span-6 rounded-xl p-3">
+      <section className="glass xl:col-span-4 rounded-xl"><ChatPanel messages={messages} input={input} setInput={setInput} onSend={send} /></section>
+      <section className="glass xl:col-span-6 rounded-xl p-3">
         <div className="mb-3 flex flex-wrap gap-2">
-          {["preview", "html", "css", "js", "full"].map((t) => <button key={t} onClick={() => setTab(t)} className={`rounded-lg px-3 py-2 text-sm ${tab === t ? "bg-blue-600" : "border border-white/20"}`}>{t.toUpperCase()}</button>)}
-          <button onClick={save} className="ml-auto rounded-lg bg-green-600 px-3 py-2 text-sm">Save</button>
-          <button onClick={download} className="rounded-lg border border-white/20 px-3 py-2 text-sm">Download</button>
+          {["preview", "html", "css", "js", "full"].map((t) => <button key={t} onClick={() => setTab(t)} className={`rounded-lg px-3 py-2 text-sm ${tab === t ? "bg-blue-600 text-white" : "border border-white/20 bg-slate-900/70"}`}>{t.toUpperCase()}</button>)}
+          <button onClick={save} className="btn-primary ml-auto text-sm">Save</button>
+          <button onClick={download} className="btn-ghost text-sm">Download</button>
         </div>
         {tab === "preview" && <LivePreview fullCode={project.full_code} />}
         {tab === "html" && <CodeEditor language="html" value={project.html_code || ""} onChange={(v) => setProject({ ...project, html_code: v })} />}
